@@ -47,6 +47,8 @@ class Yuki < Sinatra::Base
 
     require 'sinatra/reloader'
     register Sinatra::Reloader
+
+    set :port, '9000'
   end
 
   get '/' do
@@ -62,7 +64,7 @@ class Yuki < Sinatra::Base
       upload.image = File.open convert_to_gif(upload.video)
     end
     upload.save
-    redirect '/'
+    "http://localhost:#{options.port}#{upload.image.url}"
   end
 
   def convert_to_gif(movie_file)
