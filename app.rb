@@ -64,6 +64,7 @@ class Yuki < Sinatra::Base
       upload.image = File.open convert_to_gif(upload.video)
     end
     upload.save
+    `open -a Finder #{File.dirname upload.image.path}`
     "http://localhost:#{options.port}#{upload.image.url}"
   end
 
